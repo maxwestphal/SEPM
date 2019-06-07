@@ -1,0 +1,20 @@
+Package: SEPM
+Type: Package
+Title: Statistical Evaluation of Prediction Models (SEPM)
+Version: 0.1.0.9000
+Authors@R: person("Max", "Westphal", email = "mwestphal@uni-bremen.de",
+    role = c("aut", "cre"))
+Description: This package allows to conduct statistical inference (hypotheses testing and 
+    construction of confidence intervals) regarding the unknown performances of (machine-learned)
+    prediction models. The main goal is (approximately) control the type 1 error rate of the employed
+    statistical tests to obtain a reliable and realistic performance assessment.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    Metrics
+Imports: 
+    magrittr,
+    mvtnorm,
+    Matrix
+RoxygenNote: 6.1.1
