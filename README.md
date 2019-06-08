@@ -1,9 +1,5 @@
-SEPM: Statistical Evaluation of Prediction Models (R package)
-=============================================================
-
-author: Max Westphal, University of Bremen, Germany
-(<a href="mailto:mwestphal@uni-bremen.de" class="email">mwestphal@uni-bremen.de</a>)
-date: June 7, 2019
+SEPM: Statistical Evaluation of Prediction Models
+=================================================
 
 Purpose
 -------
