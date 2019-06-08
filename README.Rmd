@@ -1,11 +1,13 @@
 ---
 title: "SEPM: Statistical Evaluation of Prediction Models (R package)"
-author: "Max Westphal, Institute for Statistics, University of Bremen, Germany (mwestphal@uni-bremen.de)"
+author: "Max Westphal, University of Bremen, Germany (mwestphal@uni-bremen.de)"
 date: "June 7, 2019"
 output: 
   md_document:
     variant: markdown_github
 ---
+
+# SEPM: Statistical Evaluation of Prediction Models (R package)
 
 ## Purpose
 
