@@ -17,7 +17,11 @@ However, this package is still under development.
 
 ## Getting Started
 
+The package may be installed by using the R command
+
+```{r, message=FALSE}
 devtools::install_github("https://github.com/maxwestphal/SEPM")
+```
 
 
 ## Additional information
@@ -25,7 +29,7 @@ devtools::install_github("https://github.com/maxwestphal/SEPM")
 The package is still under development, several aspects will be improved / added in the future.
 The main evaluation chain is already supposed to work properly for most situations.
 
-SEPM provides little completely new functionality. One exeption is the simultaneous inference regarding co-primary endpoints sensitivity and specificity for multiple classifiers. However, as the package is tailored explcitly for the planning and analysis of model evaluation studies, the code efficiency should be reduced compared to using base R in conjunction with other packages.
+SEPM provides little completely new functionality. One exeption is the simultaneous inference regarding co-primary endpoints sensitivity and specificity for multiple classifiers. However, as the package is tailored explcitly for the planning and analysis of model evaluation studies, the code efficiency should be reduced compared to using base R in conjunction with other packages for this purpose.
 
 
 
