@@ -2,9 +2,13 @@
 title: "SEPM: Statistical Evaluation of Prediction Models (R package)"
 author: "Max Westphal, Institute for Statistics, University of Bremen, Germany (mwestphal@uni-bremen.de)"
 date: "June 7, 2019"
+<<<<<<< HEAD
 output: 
   md_document:
     variant: markdown_github
+=======
+output: html_document
+>>>>>>> a6d36d209379c7b872cf21f8f4ffc571a9b41430
 ---
 
 ## Purpose
@@ -21,7 +25,11 @@ However, this package is still under development.
 
 The package may be installed by using the R command
 
+<<<<<<< HEAD
 ```{r, include=T, message=FALSE}
+=======
+```{r, message=FALSE}
+>>>>>>> a6d36d209379c7b872cf21f8f4ffc571a9b41430
 devtools::install_github("https://github.com/maxwestphal/SEPM")
 ```
 
