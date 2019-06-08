@@ -35,7 +35,7 @@ The main evaluation chain is already supposed to work properly for most situatio
 
 SEPM provides little completely new functionality. One exeption is the simultaneous inference regarding co-primary endpoints sensitivity and specificity for multiple classifiers. However, as the package is tailored explcitly for the planning and analysis of model evaluation studies, the code efficiency should be reduced compared to using base R in conjunction with other packages for this purpose.
 
-
+Several simulation studies and real data examples are described at https://maxwestphal.github.io/SEPM.PUB/.
 
 
 

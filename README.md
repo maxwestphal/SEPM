@@ -37,3 +37,6 @@ specificity for multiple classifiers. However, as the package is
 tailored explcitly for the planning and analysis of model evaluation
 studies, the code efficiency should be reduced compared to using base R
 in conjunction with other packages for this purpose.
+
+Several simulation studies and real data examples are described at
+<a href="https://maxwestphal.github.io/SEPM.PUB/" class="uri">https://maxwestphal.github.io/SEPM.PUB/</a>.
