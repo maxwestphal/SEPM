@@ -21,7 +21,7 @@ However, this package is still under development.
 
 The package may be installed by using the R command
 
-```{r, include=T, message=FALSE}
+```{r, include=T, message=FALSE, eval=FALSE}
 devtools::install_github("https://github.com/maxwestphal/SEPM")
 ```
 
