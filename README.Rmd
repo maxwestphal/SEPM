@@ -7,7 +7,7 @@ output:
     variant: markdown_github
 ---
 
-# SEPM: Statistical Evaluation of Prediction Models (R package)
+# SEPM: Statistical Evaluation of Prediction Models
 
 ## Purpose
 
