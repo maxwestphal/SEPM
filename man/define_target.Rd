@@ -4,9 +4,13 @@
 \alias{define_target}
 \title{Define a target variable}
 \usage{
-define_target(target, measure, type = c("performance", "error"),
-  task = c("classification", "regression"), co.primary = c(FALSE,
-  TRUE))
+define_target(
+  target,
+  measure,
+  type = c("performance", "error"),
+  task = c("classification", "regression"),
+  co.primary = c(FALSE, TRUE)
+)
 }
 \arguments{
 \item{target}{character, giving the name of the performance measure.}
@@ -35,7 +39,7 @@ package can be imported directly. Call define_target() for a list of known targe
 \details{
 If target is a recognized (e.g. "accuracy"), all other arguments are ignored.
 If target is missing (default function call), a list of known targets is printed. The only
-stored target with co.primary = TRUE, is called "accuracy.cp" and corresponds to accessing
+stored target with co.primary = TRUE, is called "sensspec" and corresponds to accessing
 sensitivity and specificity of a classifier as co-primary endpoints.
 }
 \examples{

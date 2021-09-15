@@ -80,9 +80,7 @@ check.args.construct_target <- function(args){
 SEPM.TARGET <- list()
 SEPM.TARGET[["accuracy"]] <-
   construct_target()
-SEPM.TARGET[["accuracy.cp"]] <-
-  construct_target("accuracy.cp", Metrics::accuracy, "classification", "performance", TRUE)
-SEPM.TARGET[["rmse"]] <-
-  construct_target("rmse", Metrics::rmse, "regression", "error", FALSE)
+SEPM.TARGET[["sensspec"]] <-
+  construct_target("sensspec", Metrics::accuracy, "classification", "performance", TRUE)
 
 

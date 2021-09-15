@@ -14,11 +14,6 @@ inference <- function(x, control=FALSE){
   return(out[1:(length(out)-ifelse(control, 0, 1))])
 }
 
-selection <- function(x, control=FALSE){
-  out <- x$selection
-  return(out[1:(length(out)-ifelse(control, 0, 1))])
-}
-
 model_names <- function(x){
   estimation(x)[[1]]$model.name
 }
@@ -35,7 +30,14 @@ control <- function(x, lvl=1){
   x[[lvl]][grepl("control", names(x[[lvl]]))]
 }
 
-get <- function(x, what="model.name"){
+#' Extract features from a list
+#'
+#' @param x list or list-like object
+#' @param what slot to extract from x
+#'
+#' @return
+#' @export
+get_feature <- function(x, what="model.name"){
   u <- unlist(unlist(x, F), F)
   u[grepl(what, names(u))][[1]]
 }

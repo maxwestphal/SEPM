@@ -4,8 +4,14 @@
 \alias{define_hypothesis}
 \title{Define a hypothesis (system)}
 \usage{
-define_hypothesis(target, threshold, comparator, delta = 0,
-  alternative = c("two.sided", "less", "greater"), alpha = 0.05)
+define_hypothesis(
+  target,
+  threshold,
+  comparator,
+  delta = 0,
+  alternative = c("two.sided", "less", "greater"),
+  alpha = 0.05
+)
 }
 \arguments{
 \item{target}{either a character corresponding to a known target (e.g. "accuracy"), call

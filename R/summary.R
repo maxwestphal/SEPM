@@ -31,17 +31,5 @@ summary.SEPM.inference <- function(x, info=FALSE, control=FALSE, ...){
   return(invisible(out))
 }
 
-#' @export
-summary.SEPM.selection <- function(x, control=FALSE, ...){
-  cat(paste0("##### SEPM.selection regarding ", x$hypothesis$target, ifelse(x$hypothesis$custom, "(custom) ", ""), " with the following results:\n"))
-  out <- result(x)
-  str(out)
-  if(control){
-    out <- c(out, control(x))
-    cat("\n")
-    cat("### Control information:\n")
-    str(view(control(x)[[1]]), 2)
-  }
-  return(invisible(out))
-}
+
 

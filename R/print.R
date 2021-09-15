@@ -50,14 +50,6 @@ print.SEPM.estimation <- function(x){
   str(view(x))
 }
 
-### FUNCTION: print.SEPM.selection
-#' @export
-print.SEPM.selection <- function(x){
-  x <- rapply(x, function(x){attributes(x) <- NULL; x}, how="replace")
-  cat("##### SEPM.selection with the following attributes: \n")
-  str(view(x))
-}
-
 ### FUNCTION: print.SEPM.evaluation
 #' @export
 print.SEPM.inference <- function(x){

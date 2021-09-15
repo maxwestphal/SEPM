@@ -4,11 +4,15 @@
 \alias{select}
 \title{Statistical Evaluation of Prediction Models (SEPM)}
 \usage{
-select(estimation, method = "rank", ..., args = NULL, weights = 1,
-  n.test = NA)
+select(
+  comparison,
+  method = c("best", "close", "optimal", "user"),
+  ...,
+  args = list()
+)
 }
 \arguments{
-\item{estimation}{SEPM.estimation object derived via estimate()}
+\item{comparison}{SEPM.comparison}
 
 \item{method}{character, specifying how models (algorithms) for the evaluation study shall be
 selected. See}
@@ -16,23 +20,14 @@ selected. See}
 \item{...}{further named arguments to selection method}
 
 \item{args}{list of named arguments to selection method}
-
-\item{weights}{vector of numeric weights (default 1). Specifies how performance/error is weighted
-accross distinct subpopulation for model selection. Only relevent for co-primary endpoints and
-ignored otherwise.}
-
-\item{n.test}{integer, (assumed) sample size of evaluation study used for power calculation. If
-n.test = NA (default), no power estimation is conducted.}
 }
 \value{
-SEPM.selection with the following attributes: model (model indices), model.names, power.
+indices of selected model
 }
 \description{
 Select models based on hold-out-validation during the learning phase.
 }
 \details{
-abcdef
-}
-\examples{
-# TODO: EXAMPLE
+Select models based on empirical performances prior to evaluation study, see
+\code{\link{select_best}}, \code{\link{select_close}}, \code{\link{select_optimal}}
 }

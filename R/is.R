@@ -18,11 +18,6 @@ is.SEPM.estimate.control <- function(x)
   inherits(x, "SEPM.estimate.control")
 }
 
-is.SEPM.select.control <- function(x)
-{
-  inherits(x, "SEPM.select.control")
-}
-
 is.SEPM.compairson <- function(x)
 {
   inherits(x, "SEPM.comparison")
@@ -33,12 +28,10 @@ is.SEPM.estimation <- function(x)
   inherits(x, "SEPM.estimation")
 }
 
-is.SEPM.selection <- function(x)
+is.SEPM.inference <- function(x)
 {
-  inherits(x, "SEPM.selection")
+  inherits(x, "SEPM.inference")
 }
 
-is.SEPM.evaluation <- function(x)
-{
-  inherits(x, "SEPM.evaluation")
-}
+
+

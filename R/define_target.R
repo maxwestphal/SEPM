@@ -15,7 +15,7 @@
 #'
 #' @details If target is a recognized (e.g. "accuracy"), all other arguments are ignored.
 #' If target is missing (default function call), a list of known targets is printed. The only
-#' stored target with co.primary = TRUE, is called "accuracy.cp" and corresponds to accessing
+#' stored target with co.primary = TRUE, is called "sensspec" and corresponds to accessing
 #' sensitivity and specificity of a classifier as co-primary endpoints.
 #'
 #' @return An object of class SEPM.objective which is used as the starting point of the further

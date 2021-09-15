@@ -3,7 +3,6 @@ estimate_se <- function(comparison,
                         control,
                         args){
 
-  # d <- switch(which(cov.type[1] == c('ub', 'ml')), n-1, n) # OLD
   n <- nrow(comparison)
   est <- do.call(paste0("estimate_", control$type),
                  list(comparison=comparison, ec=control, args=args))

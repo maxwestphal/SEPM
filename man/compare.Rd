@@ -4,8 +4,17 @@
 \alias{compare}
 \title{Compare predictions and labels}
 \usage{
-compare(hypothesis, comparison, predictions, labels, features, models,
-  model.names, pos.label, ...)
+compare(
+  hypothesis,
+  comparison,
+  predictions,
+  labels,
+  features,
+  models,
+  model.names,
+  pos.label,
+  ...
+)
 }
 \arguments{
 \item{hypothesis}{object of class SEPM.hypothesis, see ?define_hypothesis.}

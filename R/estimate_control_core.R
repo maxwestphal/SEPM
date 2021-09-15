@@ -79,7 +79,8 @@ SEPM.ESTIMATE.CONTROL[["beta.approx"]] <-   ###
   construct.estimate.control("beta.approx", "generic",
                              function(comparison, lambda=1, prior=NULL){
                                out <- list()
-                               n <- nrow(comparison); d <- n+2*lambda+1 ### TODO: MODFIY D (TOTAL PRIOR OBS?!?); need prior and obs count
+                               n <- nrow(comparison); d <- n+2*lambda+1
+                               ### TODO: MODFIY D (TOTAL PRIOR OBS?!?); need prior and obs count
                                cp <- t(comparison) %*% comparison / n
 
                                k <- as.matrix(cp)*n
@@ -88,7 +89,8 @@ SEPM.ESTIMATE.CONTROL[["beta.approx"]] <-   ###
                                #  prior <- NULL
                                #}
                                # stopifnot(dim(prior)==dim(cp))
-                               k <- k + 0.5*lambda; diag(k) <- diag(k) + 0.5*lambda; # TODO: update by prior
+                               k <- k + 0.5*lambda; diag(k) <- diag(k) + 0.5*lambda;
+                               # TODO: update by general prior
                                cp <- k/(n + 2*lambda); mp <- diag(cp)
 
                                out$theta.hat <- mp

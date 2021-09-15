@@ -1,7 +1,8 @@
 ### FUNCTION: test_se
 #' @importFrom mvtnorm qmvnorm
 #' @importFrom mvtnorm pmvnorm
-test_se <- function(e, h, t, m="maxT", cv=NULL, preview=FALSE, power=FALSE)
+test_se <- function(e, h, t, m="maxT", cv=NULL, cv50 = NULL,
+                    preview=FALSE, power=FALSE)
 {
   S <- length(e$theta.hat)
   dd <- diag(rep(1,S)); colnames(dd) <- e$model.name
@@ -30,7 +31,8 @@ test_se <- function(e, h, t, m="maxT", cv=NULL, preview=FALSE, power=FALSE)
   tstat <- (est.t - rhs)/se.t
   R <- cov2cor(sigma)
 
-  if(preview){return(list(t=tstat, sigma=sigma, R=R))}
+  if(preview){return(list(t=tstat, sigma=sigma, R=R,
+                          est=est, d = est-ifelse(!is.null(h$threshold), h$threshold, 0)))}
 
   sigma.t <- diag(se.t, length(se.t)) %*% R %*% diag(se.t, length(se.t))
 
@@ -53,8 +55,11 @@ test_se <- function(e, h, t, m="maxT", cv=NULL, preview=FALSE, power=FALSE)
   if(power){return(calc_power(tstat, R, cv, h))}
 
   # bias correction (ONLY WORKING FOR SINGLE ENDPOINTS)
-  cv50 <- mvtnorm::qmvnorm(0.5, tail=switch(h$type, performance="lower.tail", error="upper.tail"),
-                           mean=rep(0, length(est)), sigma=R)$quantile
+  if(is.null(cv50)){
+    cv50 <- mvtnorm::qmvnorm(0.5, tail=switch(h$type, performance="lower.tail", error="upper.tail"),
+                             mean=rep(0, length(est)), sigma=R)$quantile
+  }
+
 
   CI.t <- data.frame(estimate = est.t,
                      corrected = est.t + switch(h$type, performance=-1, error=1)*cv50*se.t,
@@ -89,20 +94,36 @@ test_se <- function(e, h, t, m="maxT", cv=NULL, preview=FALSE, power=FALSE)
 
 ### FUNCTION: test.cp
 #' @importFrom mvtnorm qmvnorm
-test_cp <- function(e, h, t, m="maxT", power=FALSE)
+test_cp <- function(e, h, t, m="maxT", lfc=c("t", "d"), power=FALSE)
 {
+  lfc <- match.arg(lfc)
   u <- length(e)
 
   hh <- split_hyp(h, len=u)
   t1 <- lapply(1:2, function(i) test_se(e[[i]], h=hh[[i]], t=t, cv=NULL, preview=TRUE))
 
-  b <- apply(matrix(sapply(t1, function(x) abs(x$t)), ncol=2), 1, which.min)
+  b <- apply(matrix(sapply(t1, function(x) x[[lfc]]), ncol=2), 1, which.min)
   l <- b2l(b, len=length(t1))
   R <- as.matrix(as.matrix(Matrix::bdiag(lapply(t1, function(x)x$R)))[l,l])
 
   if(m != "maxT"){stop("Only maxT supported for co-primary endpoints!")}
-  cv <- mvtnorm::qmvnorm(1-h$alpha, tail=alt2tail(h$alternative),
-                         mean=rep(0, nrow(R)), sigma=R)$quantile
+
+  if(m=="maxT"){
+    cv <- mvtnorm::qmvnorm(1-h$alpha, tail=alt2tail(h$alternative),
+                           mean=rep(0, nrow(R)), sigma=R)$quantile
+  }
+  if(m=="Bonferroni"){
+    cv <- qnorm(1-(h$alpha/length(est)))
+  }
+  if(m=="univariate"){
+    cv <- qnorm(1-h$alpha)
+  }
+  if(m=="naive"){
+    cv <- 0
+  }
+
+  cv50 <- mvtnorm::qmvnorm(0.5, tail=switch(h$type, performance="lower.tail", error="upper.tail"),
+                           mean=rep(0, nrow(R)), sigma=R)$quantile
 
   if(power){
     #tstat <- apply(matrix(sapply(t1, function(x) x$t), ncol=2), 1, min)
@@ -110,7 +131,7 @@ test_cp <- function(e, h, t, m="maxT", power=FALSE)
     return(calc_power(tstat, R, cv, h))
   }
 
-  t2 <- lapply(1:u, function(i) test_se(e[[i]], h=hh[[i]], t=t, m=m, cv=cv, preview=FALSE, power=FALSE))
+  t2 <- lapply(1:u, function(i) test_se(e[[i]], h=hh[[i]], t=t, m=m, cv=cv, cv50=cv50, preview=FALSE, power=FALSE))
 
   out <- unlist(t2, recursive=FALSE)[-seq(2, (2-1)*u , 2)]
   names(out)[1:u] <- names(e)[1:u]
