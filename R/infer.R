@@ -8,18 +8,19 @@
 #' @param transform character; specify a known transform, e.g. "none" (default), "logit" or
 #' "asin.sqrt". Alternativly a object of class SEPM.transform created via
 #' \code{\link{define_transform}}).
-#' @param lfc
+#' @param lfc character, either "t" or "d"
 #'
 #' @return An SEPM.inference object, including inference results, parameters estimates and
 #' hypothesis.
 #'
 #' @examples
-#' set.seed(1)
-#' y <- rep(0:1, each=100)
-#' yhat <- sapply(seq(0.7, 0.9, 0.05),
-#'  function(p){ifelse(rbinom(200, 1, p)==1, y, 1-y)})
-#' define.hypothesis("accuracy", 0.8) %>%
-#'  compare(predictions=yhat, labels=y) %>%
+#' set.seed(1337)
+#' y <- rep(1:0, times=c(3,7))
+#' yhat <- cbind(model1 = rep(1:0, 5),
+#'              model2 = rep(0, 10),
+#'              model3 = rep(1:0, times=c(2,8)))
+#' define_hypothesis("accuracy", threshold = 0.75) %>%
+#'  compare(predictions = yhat, labels = y) %>%
 #'  estimate() %>%
 #'  infer() %>%
 #'  summary()
@@ -37,17 +38,17 @@ infer <- function(estimation,
   h <- estimation$hypothesis
   t <- define_transform(transform)
 
-  # Case (1): single endpoint
+  ## Case (1): single endpoint
   if(!h$co.primary){
     result <- test_se(e=e[[1]], h=h, t=t, m=method)
   }
 
-  # Case (2): co-primary endpoints
+  ## Case (2): co-primary endpoints
   if(h$co.primary){
     result <- test_cp(e=e, h=h, t=t, m=method, lfc=lfc)
   }
 
-  control <- list(method = method, transform = unclass(t), seed=seed)
+  control <- list(method = method, transform = unclass(t))
 
   out <- list(inference = c(result, list(control = control)),
               estimation = estimation$estimation,

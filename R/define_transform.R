@@ -1,7 +1,6 @@
 #' Transform parameter estimates before conducting statistical inference
 #'
-#' Define a transform which shall be used for a statistical test, see \code{\link{infer}} or
-#' \code{\link{evaluate}}.
+#' Define a transform which shall be used for a statistical test, see \code{\link{infer}}.
 #'
 #' @param transform character, name of the transform.
 #' @param link function, which maps the raw estimate to the transformed estimate.
@@ -10,7 +9,7 @@
 #' to have formal input arguments \code{se}, \code{n}, \code{estimate} (even if the result does
 #' not depend on them).
 #'
-#' @return A SEPM.transform which may be passed to \code{\link{infer}} or \code{\link{evaluate}}.
+#' @return A SEPM.transform which may be passed to \code{\link{infer}}.
 #'
 #' @details If transform corresponds to a known SEPM.transform object, this will object be returned
 #' and all other input arguments are ignored. \code{define_transform()} will print a list of known

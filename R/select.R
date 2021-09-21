@@ -43,7 +43,7 @@ select_user <- function(comparison,
 #' @param max_models integer, maximum number of models to be selected
 #' @param regu numeric, regularization paraemter
 #' @param break_ties logical, default: TRUE
-#' @param ...
+#' @param ... further arguments (currently ignored)
 #'
 #' @return a vector of selected model indices
 #' @export
@@ -94,7 +94,7 @@ select_close <- function(comparison,
 #' @param threshold numeric, length corresponds to number of subgroups
 #' @param regu numeric, regularization paraemter
 #' @param break_ties logical, default: TRUE
-#' @param ...
+#' @param ... further arguments (currently ignored)
 #'
 #' @return a vector of selected model indices
 #' @export
@@ -124,7 +124,8 @@ select_best <- function(comparison,
 #' @param comparison SEPM.comparison
 #' @param method_select "few" or "max"
 #' @param method_order "param" or "sample"
-#' @param param_order "mean", "tstat" or "prob"
+#' @param target_order character, see \code{SIMPle::order_dist}
+#' @param combine_order character, see \code{SIMPle::order_dist}
 #' @param max_models integer, maximum number of models
 #' @param n_eval evaluation sample size
 #' @param prev_eval evaluation prevalence
@@ -142,7 +143,7 @@ select_best <- function(comparison,
 #' @param save_plot logical
 #' @param info_plot logical
 #' @param ylim_plot numeric, length 2
-#' @param ...
+#' @param ... further arguments (currently ignored)
 #'
 #' @return a vector of selected model indices
 #' @export

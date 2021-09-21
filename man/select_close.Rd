@@ -30,7 +30,7 @@ select_close(
 
 \item{break_ties}{logical, default: TRUE}
 
-\item{...}{}
+\item{...}{further arguments (currently ignored)}
 }
 \value{
 a vector of selected model indices

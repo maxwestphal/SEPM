@@ -1,13 +1,19 @@
 ---
-title: "SEPM: Statistical Evaluation of Prediction Models (R package)"
-author: "Max Westphal, University of Bremen, Germany (mwestphal@uni-bremen.de)"
-date: "2021-09-16"
-output: 
-  md_document:
-    variant: markdown_github
+title: "SEPM README"
+author: "Max Westphal (mwestphal@uni-bremen.de)"
+output: md_document
 ---
 
 # SEPM: Statistical Evaluation of Prediction Models
+
+[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+`r badger::badge_devel(color="blue")`
+`r badger::badge_cran_release(color="orange")`
+`r badger::badge_github_actions(action="R-CMD-check")`
+
+---
+
+## Overview
 
 This R package allows to conduct statistical inference (hypotheses testing and 
 construction of confidence/comparison regions) regarding the unknown performances of multiple 
@@ -15,20 +21,31 @@ construction of confidence/comparison regions) regarding the unknown performance
 The main goal is (approximately) control the type 1 error rate of the employed
 statistical tests to obtain a reliable performance assessment.
 
+**NOTE: This package is no longer maintained!**
+
+
+---
+
 ## Installation
 
-The package can be installed by using the R command
+This package can be installed from GitHub with the following command
 
-```{r, include=T, message=FALSE, eval=FALSE}
-devtools::install_github("https://github.com/maxwestphal/SEPM")
+```{r install, eval=FALSE, echo=TRUE}
+remotes::install_github("https://github.com/maxwestphal/SEPM")
 ```
 
-## Usage
+
+---
+
+## Details
 
 Several simulation studies and real data examples are described at https://maxwestphal.github.io/SEPM.PUB/.
 The main goal of this package is to ensure that these numerical experiments can be reproduced.
 
-**This package is only roughly documented and will not be developed any further!**
+
+
+
+
 
 
 

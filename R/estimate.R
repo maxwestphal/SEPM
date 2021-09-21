@@ -16,8 +16,15 @@
 #' @return An SEPM.comparison object which summarizes the estimates result.
 #'
 #' @examples
-#' comp <- compare("accuracy", comparison=matrix(rbinom(30, 1, 0.8), 10))
-#' estimate(comp)
+#' y <- rep(1:0, times=c(3,7))
+#' yhat <- cbind(model1 = rep(1:0, 5),
+#'              model2 = rep(0, 10),
+#'              model3 = rep(1:0, times=c(2,8)))
+#' define_hypothesis("accuracy", threshold = 0.75) %>%
+#'  compare(predictions = yhat, labels = y) %>%
+#'  estimate()
+
+
 #' @export
 estimate <- function(comparison,
                      method = "default",

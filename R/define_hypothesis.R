@@ -32,7 +32,7 @@
 #' @examples
 #' tar <- define_target("accuracy")
 #' tar
-#' define.hypothesis(tar, threshold=0.8)
+#' define_hypothesis(tar, threshold=0.8)
 #' @export
 define_hypothesis <- function(target,
                               threshold,
