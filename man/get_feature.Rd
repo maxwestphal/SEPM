@@ -12,7 +12,7 @@ get_feature(x, what = "model.name")
 \item{what}{slot to extract from x}
 }
 \value{
-
+selected feature
 }
 \description{
 Extract features from a list

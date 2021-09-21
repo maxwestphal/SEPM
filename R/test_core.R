@@ -43,10 +43,10 @@ test_se <- function(e, h, t, m="maxT", cv=NULL, cv50 = NULL,
                              mean=rep(0, length(est)), sigma=R)$quantile
     }
     if(m=="Bonferroni"){
-      cv <- qnorm(1-(h$alpha/length(est)))
+      cv <- stats::qnorm(1-(h$alpha/length(est)))
     }
     if(m=="univariate"){
-      cv <- qnorm(1-h$alpha)
+      cv <- stats::qnorm(1-h$alpha)
     }
     if(m=="naive"){
       cv <- 0
@@ -113,10 +113,10 @@ test_cp <- function(e, h, t, m="maxT", lfc=c("t", "d"), power=FALSE)
                            mean=rep(0, nrow(R)), sigma=R)$quantile
   }
   if(m=="Bonferroni"){
-    cv <- qnorm(1-(h$alpha/length(est)))
+    cv <- stats::qnorm(1-(h$alpha/length(est)))
   }
   if(m=="univariate"){
-    cv <- qnorm(1-h$alpha)
+    cv <- stats::qnorm(1-h$alpha)
   }
   if(m=="naive"){
     cv <- 0
@@ -184,8 +184,8 @@ alt2tail <- function(alternative){
 ### FUNCTION: mod (measure of dependence)
 mod <- function(calpha, dim=5, alpha=0.05, tail="both.tails"){
   #if(tail=="both.tails"){alpha <- alpha/2}
-  cd <- qnorm(1-alpha)
-  # ci <- qnorm((1-alpha)^(1/dim)) # faster but gives slighty different result compared to qmvnorm
+  cd <- stats::qnorm(1-alpha)
+  # ci <- stats::qnorm((1-alpha)^(1/dim)) # faster but gives slighty different result compared to qmvnorm
   ci <- qmvnorm(1-alpha, tail=tail, sigma=diag(dim))$quantile
   round(1 - (calpha-cd)/(ci-cd), 6)
 }

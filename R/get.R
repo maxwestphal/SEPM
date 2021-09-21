@@ -35,7 +35,7 @@ control <- function(x, lvl=1){
 #' @param x list or list-like object
 #' @param what slot to extract from x
 #'
-#' @return
+#' @return selected feature
 #' @export
 get_feature <- function(x, what="model.name"){
   u <- unlist(unlist(x, F), F)

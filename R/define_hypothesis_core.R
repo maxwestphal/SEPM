@@ -6,7 +6,7 @@ is.int <- function(x){
   x %% 1 == 0
 }
 
-### FUNCTION: check.args.define.hypothesis
+### FUNCTION: check.args.define_hypothesis
 construct_hypothesis <- function(threshold, comparator, delta, alternative, alpha, co.primary){
   if(missing(threshold)){
     threshold <- NULL

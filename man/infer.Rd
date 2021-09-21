@@ -15,7 +15,7 @@ infer(estimation, method = "maxT", transform = "none", lfc = "t")
 "asin.sqrt". Alternativly a object of class SEPM.transform created via
 \code{\link{define_transform}}).}
 
-\item{lfc}{}
+\item{lfc}{character, either "t" or "d"}
 }
 \value{
 An SEPM.inference object, including inference results, parameters estimates and
@@ -26,12 +26,13 @@ This functions allows hypothesis testing regarding a hypothesis system based on 
 derived parameter estimates (see \code{\link{estimate}}).
 }
 \examples{
-set.seed(1)
-y <- rep(0:1, each=100)
-yhat <- sapply(seq(0.7, 0.9, 0.05),
- function(p){ifelse(rbinom(200, 1, p)==1, y, 1-y)})
-define.hypothesis("accuracy", 0.8) \%>\%
- compare(predictions=yhat, labels=y) \%>\%
+set.seed(1337)
+y <- rep(1:0, times=c(3,7))
+yhat <- cbind(model1 = rep(1:0, 5),
+             model2 = rep(0, 10),
+             model3 = rep(1:0, times=c(2,8)))
+define_hypothesis("accuracy", threshold = 0.75) \%>\%
+ compare(predictions = yhat, labels = y) \%>\%
  estimate() \%>\%
  infer() \%>\%
  summary()

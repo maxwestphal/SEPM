@@ -27,11 +27,11 @@ draw_sample_efp <- function(rdist,
   par <- lapply(1:G, function(g){
     sample[[g]]-threshold[g]
   }) %>%
-    SIMPle::ssapply(3, min) %>% {.[[1]]}
+    SIMPle::convert_sample(3, min) %>% {.[[1]]}
   emp <- lapply(1:G, function(g){
     (pred[[g]]-threshold[g])/sqrt(pred[[g]]*(1-pred[[g]])/size[g])
   }) %>%
-    SIMPle::ssapply(3, min) %>% {.[[1]]}
+    SIMPle::convert_sample(3, min) %>% {.[[1]]}
 
   ## calculate expeted final performance (efp)
   lapply(1:draws, function(i){
@@ -56,10 +56,10 @@ calc_size <- function(G, n_eval, prev_eval, n_val, prev_val, rdm=TRUE){
     size <- numeric(2)
     if(!is.numeric(prev_eval)){
       stopifnot(is.numeric(n_val) & is.numeric(prev_val))
-      prev_eval <- rbeta(1, n_val*prev_val, n_val*(1-prev_val))
+      prev_eval <- stats::rbeta(1, n_val*prev_val, n_val*(1-prev_val))
     }
     if(rdm){
-      size[1] <- rbinom(1, n_eval, prev_eval)
+      size[1] <- stats::rbinom(1, n_eval, prev_eval)
     }
     if(!rdm){
       size[1] <- round(prev_eval*n_eval)
@@ -149,8 +149,10 @@ optimize_efp <- function(rdist,
 ## TODO:
 opt_efp_plot <- function(e = parent.frame()){
 
-  if(e$iter==1){plot.new()}
-  if(e$save_plot) png(paste0("opt_efp_", e$iter ,".png"), width = 1280, height = 720, res = 108)
+  if(e$iter==1){graphics::plot.new()}
+  if(e$save_plot){
+    grDevices::png(paste0("opt_efp_", e$iter ,".png"), width = 1280, height = 720, res = 108)
+  }
 
   m <- e$m
   cex_text <- 1.25
@@ -162,37 +164,37 @@ opt_efp_plot <- function(e = parent.frame()){
   }
 
   plot(1:m, e$efp_est, ylim=c(yl, yu),
-       ylab=bquote(bold("EFP(S)")), xlab=bquote(bold("S")),
+       ylab=bquote(crayon::bold("EFP(S)")), xlab=bquote(crayon::bold("S")),
        pch=18, cex=1.5, col="darkorange")
 
-  abline(h=e$efp_opt, col="cyan", lwd=3, lty=5)
-  abline(h=e$efp_cu, col="darkorange", lwd=3, lty=5)
+  graphics::abline(h=e$efp_opt, col="cyan", lwd=3, lty=5)
+  graphics::abline(h=e$efp_cu, col="darkorange", lwd=3, lty=5)
 
-  lines(1:m, e$efp_est[1:m], lwd=3, col="darkorange")
-  lines(e$act, e$efp_est[e$act], lwd=3, col="cyan")
+  graphics::lines(1:m, e$efp_est[1:m], lwd=3, col="darkorange")
+  graphics::lines(e$act, e$efp_est[e$act], lwd=3, col="cyan")
 
-  points(1:m, e$efp_est[1:m], pch=18, cex=1.5, col="darkorange")
-  points(e$act, e$efp_est[e$act], pch=18, cex=1.5, col="cyan")
+  graphics::points(1:m, e$efp_est[1:m], pch=18, cex=1.5, col="darkorange")
+  graphics::points(e$act, e$efp_est[e$act], pch=18, cex=1.5, col="cyan")
 
-  points(1, e$efp_est[1], pch=18, cex=2, col="red")
-  points(e$sel_few, e$efp_few, pch=18, cex=2, col="green")
-  points(e$sel_opt, e$efp_opt, pch=18, cex=2, col="magenta")
+  graphics::points(1, e$efp_est[1], pch=18, cex=2, col="red")
+  graphics::points(e$sel_few, e$efp_few, pch=18, cex=2, col="green")
+  graphics::points(e$sel_opt, e$efp_opt, pch=18, cex=2, col="magenta")
 
   yt <- (yu+e$efp_opt)/2
-  text(round(m/6*1), yt, labels=paste0("EFP[1]= ", round(e$efp_est[1], 4)*100, "%"), col="red", cex=cex_text)
-  text(round(m/6*3), yt, labels=paste0("EFP[", e$sel_few, "]= ", round(e$efp_few, 4)*100, "%"), col="green", cex=cex_text)
-  text(round(m/6*5), yt, labels=paste0("EFP[", e$sel_opt, "]= ", round(e$efp_opt, 4)*100, "%"), col="magenta", cex=cex_text)
+  graphics::text(round(m/6*1), yt, labels=paste0("EFP[1]= ", round(e$efp_est[1], 4)*100, "%"), col="red", cex=cex_text)
+  graphics::text(round(m/6*3), yt, labels=paste0("EFP[", e$sel_few, "]= ", round(e$efp_few, 4)*100, "%"), col="green", cex=cex_text)
+  graphics::text(round(m/6*5), yt, labels=paste0("EFP[", e$sel_opt, "]= ", round(e$efp_opt, 4)*100, "%"), col="magenta", cex=cex_text)
 
   if(e$info_plot){
-    text(round(m/6*c(2,3,4,5)), yl+0.005,
-         labels=c(paste0("batch= ", e$iter),
-                  paste0("nsim= ", e$iter*e$batch_size),
-                  paste0("time= ", round(difftime(Sys.time(), e$time, units="secs"), 0)),
-                  paste0("delta= ", round(e$delta, 5))), cex=cex_text)
+    graphics::text(round(m/6*c(2,3,4,5)), yl+0.005,
+                   labels=c(paste0("batch= ", e$iter),
+                            paste0("nsim= ", e$iter*e$batch_size),
+                            paste0("time= ", round(difftime(Sys.time(), e$time, units="secs"), 0)),
+                            paste0("delta= ", round(e$delta, 5))), cex=cex_text)
   }
 
   if(e$save_plot){
-    dev.off()
+    grDevices::dev.off()
   }
 }
 

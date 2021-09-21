@@ -37,6 +37,10 @@ select_optimal(
 
 \item{method_order}{"param" or "sample"}
 
+\item{target_order}{character, see \code{SIMPle::order_dist}}
+
+\item{combine_order}{character, see \code{SIMPle::order_dist}}
+
 \item{max_models}{integer, maximum number of models}
 
 \item{n_eval}{evaluation sample size}
@@ -71,9 +75,7 @@ select_optimal(
 
 \item{ylim_plot}{numeric, length 2}
 
-\item{...}{}
-
-\item{param_order}{"mean", "tstat" or "prob"}
+\item{...}{further arguments (currently ignored)}
 }
 \value{
 a vector of selected model indices

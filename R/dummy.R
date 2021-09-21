@@ -25,7 +25,7 @@ dummy <- function(target="accuracy",
 #' @export
 dummy_accuracy <- function(n=100,
                            theta=seq(0.7, 0.9, 0.05)){
-  sapply(theta, function(p) rbinom(n[1],1,p))
+  sapply(theta, function(p) stats::rbinom(n[1],1,p))
 }
 
 #' Generate (uncorrelated) dummy data (target: sensspec)

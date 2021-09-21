@@ -54,5 +54,5 @@ of models minus one. Similarly for alternative = "less" or "two.sided".
 \examples{
 tar <- define_target("accuracy")
 tar
-define.hypothesis(tar, threshold=0.8)
+define_hypothesis(tar, threshold=0.8)
 }

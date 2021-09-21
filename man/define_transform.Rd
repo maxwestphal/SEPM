@@ -18,11 +18,10 @@ to have formal input arguments \code{se}, \code{n}, \code{estimate} (even if the
 not depend on them).}
 }
 \value{
-A SEPM.transform which may be passed to \code{\link{infer}} or \code{\link{evaluate}}.
+A SEPM.transform which may be passed to \code{\link{infer}}.
 }
 \description{
-Define a transform which shall be used for a statistical test, see \code{\link{infer}} or
-\code{\link{evaluate}}.
+Define a transform which shall be used for a statistical test, see \code{\link{infer}}.
 }
 \details{
 If transform corresponds to a known SEPM.transform object, this will object be returned
