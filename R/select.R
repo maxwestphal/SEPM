@@ -192,7 +192,7 @@ select_optimal <- function(comparison,
                             threshold = threshold,
                             size = calc_size(G, n_eval, prev_eval, n_val, prev_val, FALSE),
                             ties.method="random")[1:max_models]
-  rdist <- SIMPle::select_vars(dist, var_sel=ord)
+  rdist <- SIMPle::select_vars(dist, selection=ord)
 
   ## optimize efp:
   opt <- optimize_efp(rdist,

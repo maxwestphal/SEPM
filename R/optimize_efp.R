@@ -18,10 +18,12 @@ draw_sample_efp <- function(rdist,
   ## draw true parameters (sample) and estimates (sample_pred)
   size <- calc_size(G, n_eval, prev_eval, n_val, prev_val, rdm)
   sample <- SIMPle::draw_sample(rdist, draws)
-  pred <- SIMPle::draw_sample_pred(rdist, sample,
-                                   size, count=FALSE, correct=TRUE,
+  pred <- SIMPle::draw_sample_pred(rdist,
+                                   sample=sample,
+                                   size=size,
+                                   method_pred = method_pred,
                                    method_ext = method_ext,
-                                   method_pred = method_pred, regu=1)
+                                   regu=1, count=FALSE)
 
   ## transform samples
   par <- lapply(1:G, function(g){
