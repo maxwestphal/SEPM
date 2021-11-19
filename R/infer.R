@@ -8,7 +8,6 @@
 #' @param transform character; specify a known transform, e.g. "none" (default), "logit" or
 #' "asin.sqrt". Alternativly a object of class SEPM.transform created via
 #' \code{\link{define_transform}}).
-#' @param lfc character, either "t" or "d"
 #'
 #' @return An SEPM.inference object, including inference results, parameters estimates and
 #' hypothesis.
@@ -26,9 +25,8 @@
 #'  summary()
 #' @export
 infer <- function(estimation,
-                  method = 'maxT',
-                  transform = "none",
-                  lfc="t")
+                  method = "maxT",
+                  transform = "none")
 {
   if(!is.SEPM.estimation(estimation)){
     stop("estimation needs to be an SEPM.estimation object, see ?estimate.")
@@ -45,7 +43,7 @@ infer <- function(estimation,
 
   ## Case (2): co-primary endpoints
   if(h$co.primary){
-    result <- test_cp(e=e, h=h, t=t, m=method, lfc=lfc)
+    result <- test_cp(e=e, h=h, t=t, m=method)
   }
 
   control <- list(method = method, transform = unclass(t))
@@ -54,5 +52,6 @@ infer <- function(estimation,
               estimation = estimation$estimation,
               hypothesis = h)
   class(out) <- append(class(out), "SEPM.inference")
+
   return(out)
 }

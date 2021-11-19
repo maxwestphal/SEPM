@@ -1,3 +1,4 @@
+#' @importFrom utils str
 #' @export
 summary.SEPM.comparison <- function(object, ...){
   cat(paste0("##### SEPM.comparison regarding ", object$hypothesis$target,
@@ -22,15 +23,15 @@ summary.SEPM.inference <- function(object, info=FALSE, control=FALSE, ...){
   out <- result(object)
   print(out)
   if(info){
-    out <- c(out, info(x))
+    out <- c(out, info(object))
     cat("### Further information:\n")
-    str(view(info(x)[[1]]), 1)
+    utils::str(view(info(object)[[1]]), 1)
   }
   if(control){
-    out <- c(out, control(x))
+    out <- c(out, control(object))
     cat("\n")
     cat("### Control information:\n")
-    str(view(control(x)[[1]]), 2)
+    utils::str(view(control(object)[[1]]), 2)
   }
   return(invisible(out))
 }

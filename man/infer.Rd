@@ -4,7 +4,7 @@
 \alias{infer}
 \title{Hypothesis testing regarding model performances}
 \usage{
-infer(estimation, method = "maxT", transform = "none", lfc = "t")
+infer(estimation, method = "maxT", transform = "none")
 }
 \arguments{
 \item{estimation}{object of class SEPM.estimation (see \code{\link{estimate}}).}
@@ -14,8 +14,6 @@ infer(estimation, method = "maxT", transform = "none", lfc = "t")
 \item{transform}{character; specify a known transform, e.g. "none" (default), "logit" or
 "asin.sqrt". Alternativly a object of class SEPM.transform created via
 \code{\link{define_transform}}).}
-
-\item{lfc}{character, either "t" or "d"}
 }
 \value{
 An SEPM.inference object, including inference results, parameters estimates and

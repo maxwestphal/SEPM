@@ -169,7 +169,7 @@ pred2comp <- function(predictions,
 ### FUNCTION: model2pred
 model2pred <- function(model, newdata, ...)
 {
-  pred <- predict(model, newdata=newdata, ...)
+  pred <- stats::predict(model, newdata=newdata, ...)
   return(pred)
 }
 

@@ -1,3 +1,4 @@
+#' @importFrom rlang .data
 draw_sample_efp <- function(rdist,
                             draws = 10,
                             n_eval = 100,
@@ -29,11 +30,11 @@ draw_sample_efp <- function(rdist,
   par <- lapply(1:G, function(g){
     sample[[g]]-threshold[g]
   }) %>%
-    SIMPle::convert_sample(3, min) %>% {.[[1]]}
+    SIMPle::convert_sample(3, min) %>% {.data[[1]]}
   emp <- lapply(1:G, function(g){
     (pred[[g]]-threshold[g])/sqrt(pred[[g]]*(1-pred[[g]])/size[g])
   }) %>%
-    SIMPle::convert_sample(3, min) %>% {.[[1]]}
+    SIMPle::convert_sample(3, min) %>% {.data[[1]]}
 
   ## calculate expeted final performance (efp)
   lapply(1:draws, function(i){
@@ -41,7 +42,7 @@ draw_sample_efp <- function(rdist,
       final_selection(par[i, 1:s], emp[i, 1:s])
     })
   }) %>%
-    do.call(rbind, .) %>%
+    do.call(rbind, .data) %>%
     return()
 }
 
@@ -118,7 +119,7 @@ optimize_efp <- function(rdist,
     efp_opt <- max(efp_est)
     sel_opt <- min(which(efp_est == efp_opt))
 
-    efp_cu <- efp_opt - k*sqrt(var(simvals[, sel_opt], na.rm=TRUE)/sum(!is.na(simvals[, sel_opt])))
+    efp_cu <- efp_opt - k*sqrt(stats::var(simvals[, sel_opt], na.rm=TRUE)/sum(!is.na(simvals[, sel_opt])))
     delta <- efp_opt - efp_cu
     act <- which(efp_est >= efp_cu)
     act <- min(act):max(act)
@@ -148,7 +149,6 @@ optimize_efp <- function(rdist,
   )
 }
 
-## TODO:
 opt_efp_plot <- function(e = parent.frame()){
 
   if(e$iter==1){graphics::plot.new()}

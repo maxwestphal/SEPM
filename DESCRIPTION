@@ -1,7 +1,7 @@
 Package: SEPM
 Type: Package
 Title: Statistical Evaluation of Prediction Models
-Version: 0.1.2
+Version: 0.2.0
 Authors@R: 
     person(given = "Max",
            family = "Westphal",
@@ -24,7 +24,16 @@ Imports:
     stats,
     graphics,
     grDevices,
-    crayon
-Suggests:
-    SIMPle
+    crayon,
+    rlang,
+    SIMPle (>= 0.2.2)
+Suggests: 
+    knitr,
+    rmarkdown,
+    badger,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Remotes:  
+    maxwestphal/SIMPle
 URL: https://github.com/maxwestphal/SEPM
+

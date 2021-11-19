@@ -20,7 +20,7 @@ select_best(
 
 \item{threshold}{numeric, length corresponds to number of subgroups}
 
-\item{regu}{numeric, regularization paraemter}
+\item{regu}{numeric, regularization parameter}
 
 \item{break_ties}{logical, default: TRUE}
 

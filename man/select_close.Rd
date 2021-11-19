@@ -26,7 +26,7 @@ select_close(
 
 \item{max_models}{integer, maximum number of models to be selected}
 
-\item{regu}{numeric, regularization paraemter}
+\item{regu}{numeric, regularization parameter}
 
 \item{break_ties}{logical, default: TRUE}
 

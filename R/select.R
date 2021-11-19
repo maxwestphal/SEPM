@@ -41,7 +41,7 @@ select_user <- function(comparison,
 #' @param mode character, "weighted" or "min"
 #' @param threshold numeric, length corresponds to number of subgroups
 #' @param max_models integer, maximum number of models to be selected
-#' @param regu numeric, regularization paraemter
+#' @param regu numeric, regularization parameter
 #' @param break_ties logical, default: TRUE
 #' @param ... further arguments (currently ignored)
 #'
@@ -60,7 +60,14 @@ select_close <- function(comparison,
   max_models <- min(ncol(comparison$comparison[[1]]), round(max_models))
 
   n <- sapply(comparison$comparison, nrow) + (2*regu)
-  w <- 1/((1-threshold[1])/(1-threshold[2]) + 1); w <- c(w, 1-w)
+
+  if(comparison$hypothesis$target == "accuracy"){}
+
+  w <- switch(comparison$hypothesis$target,
+              1,
+              accuracy = 1,
+              sensspec = t2w(threshold))
+
   est <- lapply(comparison$comparison, function(x){(colSums(x)+regu)/(nrow(x)+2*regu)})
   stopifnot(length(threshold) == length(est))
   delta <- switch(mode,
@@ -77,7 +84,7 @@ select_close <- function(comparison,
   sel <- switch(mode,
                 weighted = which(abs(delta - delta[best]) <= k*sqrt(sum((w^2)* (se[best, ])^2)) ),
                 min = which(apply(sapply(1:length(est), function(g){
-                  abs(est[[g]] - est[[g]][best]) <= k*se[best, g]} ), 1, sum) == 2) )
+                  abs(est[[g]] - est[[g]][best]) <= k*se[best, g]} ), 1, sum) == length(est)) )
 
   ord <- order(rank(delta[sel], ties.method = ifelse(break_ties, "random", "average")),
                decreasing = ifelse(comparison$hypothesis$type == "performance", TRUE, FALSE))
@@ -86,13 +93,17 @@ select_close <- function(comparison,
   return(unname(sel_ord))
 }
 
+t2w <- function(threshold){
+  w1 <- 1/((1-threshold[1])/(1-threshold[2]) + 1)
+  return(c(w1, 1-w1))
+}
 
 #' Return empirically best prediction model
 #'
 #' @param comparison SEPM.comparison
 #' @param mode character, "weighted" or "min"
 #' @param threshold numeric, length corresponds to number of subgroups
-#' @param regu numeric, regularization paraemter
+#' @param regu numeric, regularization parameter
 #' @param break_ties logical, default: TRUE
 #' @param ... further arguments (currently ignored)
 #'
@@ -105,7 +116,12 @@ select_best <- function(comparison,
                         break_ties = TRUE,
                         ...){
   mode <- match.arg(mode)
-  w <- 1/((1-threshold[1])/(1-threshold[2]) + 1); w <- c(w, 1-w)
+
+  w <- switch(comparison$hypothesis$target,
+              1,
+              accuracy = 1,
+              sensspec = t2w(threshold))
+
   est <- lapply(comparison$comparison, function(x){(colSums(x)+regu)/(nrow(x)+2*regu)})
   stopifnot(length(threshold) == length(est))
   delta <- switch(mode,
@@ -217,86 +233,3 @@ select_optimal <- function(comparison,
   return(result)
 }
 
-
-
-# # TODO ----------------------------------------------------------------------------------------
-#
-#
-# #id <- 9893
-# id <- 9893
-# load(paste0("F:/DataScience/R/SIM/MLE_SIM/DATA", "/", "job", id, ".RData"))
-# str(instance, 1)
-# comparison <- SEPM::define_hypothesis("sensspec", threshold = c(0.5,0.5)) %>%
-#   compare(predictions = as.matrix(instance$train.models$val$pred),
-#           labels=instance$train.models$val$labels)
-#
-# comp <- comparison$comparison
-#
-# # select.args="sesp=T"; eval.n=n.eval=200; select.max=sqrt(n.eval)
-#
-#
-# # ARGS ----------------------------------------------------------------------------------------
-# n_eval = 100
-# prev_eval = 0.3
-# n_val = NA
-# prev_val = NA
-# rdm = TRUE
-# threshold = c(0.5, 0.5)
-# batch_size = 10
-# max_iter = 10
-# target_tol = 1e-3
-#
-# choice = "few" # "opt"
-#
-#
-# max_models <- 100
-#
-# #comp <- SEPM.LFC::data_sensspec(S=100)$comp
-#
-
-# ss <- dist %>% SIMPle::sample_dist_marginal(5000) %>%
-#   SIMPle::ssapply(3, min)
-# ord_pr <- SIMPle::order_dist(dist, method = "prob", critvals = c(0.75, 0.75))
-# ord_ts <- SIMPle::order_dist(dist, method = "tstat", critvals = c(0.75, 0.75))
-# plot(colMeans(ss[[1]])[ord_ts])
-# plot(colMeans(ss[[1]])[ord_pr])
-# sr1 <- rdist %>% SIMPle::sample_dist_marginal(5000) %>%
-#   SIMPle::ssapply(3, min)
-# plot(colMeans(sr[[1]]))
-
-#
-# TODO ----------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# TODO ----------------------------------------------------------------------------------------
-
-#apply(sapply(rdist, function(d) sapply(d$features$margins, function(y) y$features$mean) ), 1, min) #%>% sort()
-
-# cpe.rank = "meanmin" # cpe.rank = "min"
-# select.max = 100
-# eval.n=200
-# max.iter=50
-# ylim=c(0.78, 0.84) # 650 x 650
-# set.seed(6) #id=9893;
-#instance$train.models$val$thetahat %>% dplyr::arrange(-pmin(theta0, theta1))
-
-#steady.plot=T, save.plot=F, info.plot=F, ylim=ylim, return.rawdata=T)
-
-# png_files <- paste0("opt_efp_", 1:45 ,".png")
-# av::av_encode_video(png_files, 'opt_efp.mp4', framerate = 2)
-# utils::browseURL('output.mp4')
