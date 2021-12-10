@@ -206,7 +206,7 @@ select_optimal <- function(comparison,
                             target = target_order,
                             combine = combine_order,
                             threshold = threshold,
-                            size = calc_size(G, n_eval, prev_eval, n_val, prev_val, FALSE),
+                            size = calc_size(G, n_eval, prev_eval, n_val, prev_val, rdm),
                             ties.method="random")[1:max_models]
   rdist <- SIMPle::select_vars(dist, selection=ord)
 

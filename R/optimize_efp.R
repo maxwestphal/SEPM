@@ -1,11 +1,10 @@
-#' @importFrom rlang .data
 draw_sample_efp <- function(rdist,
                             draws = 10,
                             n_eval = 100,
                             prev_eval = 0.5,
                             n_val = NA,
                             prev_val = NA,
-                            rdm = TRUE,
+                            rdm = FALSE,
                             threshold = c(0.5, 0.5),
                             method_ext = "basic",
                             method_pred = "mbeta_approx"
@@ -20,30 +19,30 @@ draw_sample_efp <- function(rdist,
   size <- calc_size(G, n_eval, prev_eval, n_val, prev_val, rdm)
   sample <- SIMPle::draw_sample(rdist, draws)
   pred <- SIMPle::draw_sample_pred(rdist,
-                                   sample=sample,
-                                   size=size,
+                                   sample = sample,
+                                   size = size,
                                    method_pred = method_pred,
                                    method_ext = method_ext,
-                                   regu=1, count=FALSE)
+                                   count = FALSE)
 
   ## transform samples
   par <- lapply(1:G, function(g){
     sample[[g]]-threshold[g]
   }) %>%
-    SIMPle::convert_sample(3, min) %>% {.data[[1]]}
+    SIMPle::convert_sample(3, min) %>% `[[`(1)
   emp <- lapply(1:G, function(g){
     (pred[[g]]-threshold[g])/sqrt(pred[[g]]*(1-pred[[g]])/size[g])
   }) %>%
-    SIMPle::convert_sample(3, min) %>% {.data[[1]]}
+    SIMPle::convert_sample(3, min) %>% `[[`(1)
 
-  ## calculate expeted final performance (efp)
-  lapply(1:draws, function(i){
+  ## calculate expected final performance (efp)
+  efp <- lapply(1:draws, function(i){
     sapply(1:m, function(s){
       final_selection(par[i, 1:s], emp[i, 1:s])
     })
-  }) %>%
-    do.call(rbind, .data) %>%
-    return()
+  })
+
+  return(do.call(rbind, efp))
 }
 
 final_selection <- function(par, emp){
@@ -67,6 +66,7 @@ calc_size <- function(G, n_eval, prev_eval, n_val, prev_val, rdm=TRUE){
     if(!rdm){
       size[1] <- round(prev_eval*n_eval)
     }
+    size[1] <- size[1] %>% max(1) %>% min(n_eval)
     size[2] <- n_eval - size[1]
   }
   return(size)
@@ -82,7 +82,7 @@ optimize_efp <- function(rdist,
                          batch_size = 10,
                          max_iter = 50,
                          target_tol = 1e-3,
-                         return_simvals=FALSE,
+                         return_simvals = FALSE,
                          method_ext = "basic",
                          method_pred = "mbeta_approx",
                          steady_plot = FALSE,
