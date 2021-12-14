@@ -34,5 +34,7 @@ This package can be installed from GitHub with the following command
 ## Details
 
 Several simulation studies and real data examples are described at
-<https://maxwestphal.github.io/SEPM.PUB/>. The main goal of this package
-is to ensure that these numerical experiments can be reproduced.
+<https://maxwestphal.github.io/SEPM.PUB/>.
+
+The main goal of this package is to ensure that these numerical
+experiments can be reproduced.
