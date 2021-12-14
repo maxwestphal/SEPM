@@ -4,7 +4,7 @@
 state but is no longer being actively developed; support/maintenance
 will be provided as time
 allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
-[![](https://img.shields.io/badge/devel%20version-0.1.2-blue.svg)](https://github.com/maxwestphal/SEPM)
+[![](https://img.shields.io/badge/devel%20version-0.3.0-blue.svg)](https://github.com/maxwestphal/SEPM)
 [![](https://www.r-pkg.org/badges/version/SEPM?color=orange)](https://cran.r-project.org/package=SEPM)
 [![R build
 status](https://github.com/maxwestphal/SEPM/workflows/R-CMD-check/badge.svg)](https://github.com/maxwestphal/SEPM/actions)

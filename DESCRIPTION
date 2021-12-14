@@ -1,7 +1,7 @@
 Package: SEPM
 Type: Package
 Title: Statistical Evaluation of Prediction Models
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: 
     person(given = "Max",
            family = "Westphal",
