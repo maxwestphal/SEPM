@@ -12,7 +12,7 @@ Description: This package allows to conduct statistical inference (hypotheses te
     construction of confidence intervals) regarding the unknown performances of (machine-learned)
     prediction models. The main goal is (approximately) control the type 1 error rate of the employed
     statistical tests to obtain a reliable performance assessment.
-License: GPL-3
+License: LGPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
@@ -33,7 +33,6 @@ Suggests:
     badger,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-Remotes:  
+Remotes: 
     maxwestphal/SIMPle
 URL: https://github.com/maxwestphal/SEPM
-
