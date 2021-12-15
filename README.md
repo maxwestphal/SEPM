@@ -25,7 +25,7 @@ unknown performances of multiple (machine-learned) prediction models.
 
 This package can be installed from GitHub with the following command
 
-    remotes::install_github("https://github.com/maxwestphal/SEPM")
+    remotes::install_github("maxwestphal/SEPM")
 
 ------------------------------------------------------------------------
 
