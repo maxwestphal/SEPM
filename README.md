@@ -13,11 +13,9 @@ status](https://github.com/maxwestphal/SEPM/workflows/R-CMD-check/badge.svg)](ht
 
 ## Overview
 
-This R package allows to conduct statistical inference (hypotheses
+This **R package** allows to conduct statistical inference (hypotheses
 testing and construction of confidence/comparison regions) regarding the
 unknown performances of multiple (machine-learned) prediction models.
-The main goal is (approximately) control the type 1 error rate of the
-employed statistical tests to obtain a reliable performance assessment.
 
 **NOTE: This package is no longer maintained!**
 
