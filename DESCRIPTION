@@ -26,7 +26,7 @@ Imports:
     grDevices,
     crayon,
     rlang,
-    SIMPle (>= 0.2.2)
+    SIMPle (>= 0.3.0)
 Suggests: 
     knitr,
     rmarkdown,
